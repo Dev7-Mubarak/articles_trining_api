@@ -7,6 +7,8 @@ use App\Models\Article;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
+
 class DestroyController extends Controller
 {
     use ApiResponse;
@@ -17,6 +19,10 @@ class DestroyController extends Controller
 
         if (!$article) {
             return $this->error('Article not found', null, 404);
+        }
+
+        if ($article->image) {
+            Storage::disk('public')->delete($article->image);
         }
 
         $article->delete();

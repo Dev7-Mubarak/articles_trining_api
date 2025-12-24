@@ -14,7 +14,13 @@ class StoreController extends Controller
 
     public function __invoke(StoreArticleRequest $request)
     {
-        $article = Article::create($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('articles', 'public');
+        }
+
+        $article = Article::create($data);
         return $this->success(new ArticleResource($article), 'Article created successfully', 201);
     }
 }

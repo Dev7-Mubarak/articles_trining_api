@@ -16,8 +16,10 @@ class UpdateArticleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'sometimes|string|max:255',
-            'body'  => 'sometimes|string',
+            'title'       => 'sometimes|string|max:255',
+            'body'        => 'sometimes|string',
+            'category_id' => 'sometimes|exists:categories,id',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 

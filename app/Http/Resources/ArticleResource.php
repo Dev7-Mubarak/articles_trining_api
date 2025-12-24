@@ -18,6 +18,7 @@ class ArticleResource extends JsonResource
             'id'       => $this->id,
             'title'    => $this->title,
             'body'     => $this->body,
+            'image'    => $this->image ? url('storage/' . $this->image) : null,
             'category' => new CategoryResource($this->category),
         ];
     }
