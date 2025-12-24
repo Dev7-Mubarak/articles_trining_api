@@ -14,7 +14,8 @@ class IndexController extends Controller
 
     public function __invoke(Request $request)
     {
-        $articles = Article::with('category')->get();
-        return $this->success(ArticleResource::collection($articles), 'Articles retrieved successfully');
+        $articles = Article::with('category')->paginate(10);
+        return $this->paginatedSuccess(ArticleResource::collection($articles), 'Articles retrieved successfully');
     }
 }
+    

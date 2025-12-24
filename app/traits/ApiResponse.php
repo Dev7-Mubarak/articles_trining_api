@@ -31,4 +31,25 @@ trait ApiResponse
             'errors'  => $errors,
         ], $status);
     }
+
+    protected function paginatedSuccess(
+        mixed $resource,
+        string $message = 'Success',
+        int $status = 200
+    ): JsonResponse {
+        $response = $resource->response()->getData(true);
+
+        return response()->json([
+            'success' => true,
+            'message' => $message,
+            'data'    => $response['data'],
+            'pagination' => [
+                'current_page' => $response['meta']['current_page'],
+                'last_page'    => $response['meta']['last_page'],
+                'per_page'     => $response['meta']['per_page'],
+                'total'        => $response['meta']['total'],
+            ],
+            'errors'  => null,
+        ], $status);
+    }
 }
