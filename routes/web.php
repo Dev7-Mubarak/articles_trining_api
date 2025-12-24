@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\UserController;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/test', function () {
+Route::get('/', function () {
     return view('welcome');
 });
 
@@ -12,4 +15,5 @@ Route::get('/hello', function () {
     return view('hello')->with('name', $name)->with('value', $value);
 });
 
-Route::get('myBooking', 'App\Http\Controllers\BookingControlle');
+Route::get('myBooking', BookingController::class . '@myBooking');
+

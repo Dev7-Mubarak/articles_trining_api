@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Http\Controllers\Articles;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreArticleRequest;
+use App\Models\Article;
+use App\Traits\ApiResponse;
+
+class StoreController extends Controller
+{
+    use ApiResponse;
+
+    public function __invoke(StoreArticleRequest $request)
+    {
+        $article = Article::create($request->validated());
+        return $this->success($article, 'Article created successfully', 201);
+    }
+}
