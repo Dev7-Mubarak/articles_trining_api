@@ -35,4 +35,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Categories
     Route::get('/categories', CategoryIndexController::class);
+
+    // Tags
+    Route::get('/tags', \App\Http\Controllers\Tags\IndexController::class);
+    Route::post('/tags', \App\Http\Controllers\Tags\StoreController::class);
 });
